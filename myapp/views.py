@@ -16,7 +16,12 @@ def HomePage(req):
     return render(req,"index.html", {'name':'smsoni infosoft'})    
 
 def Aboutus(req):
-    return render(req,"aboutus.html", {'contact':8128992581})  
+    context = {
+        'title' :'AboutUs',
+        'About_txt' : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam minus aliquid, itaque illum assumenda repellendus dolorem, dolore numquam totam saepe, porro delectus, libero enim odio quo. Explicabo ex sapiente sit eligendi, facere voluptatum! Quia vero rerum sunt porro architecto corrupti eaque corporis eum, enim soluta, perferendis dignissimos, repellendus, beatae laboriosam.',
+        'About_img' : 'about-us.png'
+    }
+    return render(req,"aboutus.html", context)  
 
 def Products(req):
     return render(req,'products.html',{'productname':'C Book'})      
