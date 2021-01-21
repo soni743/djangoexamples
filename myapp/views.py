@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .forms import  *
 # Create your views here.
 
 def test(req):
@@ -27,4 +28,10 @@ def Products(req):
     return render(req,'products.html',{'productname':'C Book'})      
 
 def Contacts(req):
-    return render(req,'contactus.html',{'email':'soni7431@gmail.com'})    
+    return render(req,'contactus.html',{'email':'soni7431@gmail.com'})  
+
+def Person(req):
+    context = {
+        'form' : PersonForm
+    }
+    return render(req,'person.html',context)      
