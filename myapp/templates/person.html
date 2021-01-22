@@ -6,7 +6,30 @@
            <form method='post'>
                 
                 {% csrf_token %}
-                {{form.as_p}}
+                <!-- {{form.as_p}} -->
+                <table>
+                    <tr>
+                        <td>{{form.name.label}}</td>
+                        <td>{{form.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{form.city.label}}</td>
+                        <td>{{form.city}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{form.gender.label}}</td>
+                        <td>{{form.gender}}</td>
+                    </tr>
+                  
+                    <tr>
+                        <td>{{form.contactno.label}}</td>
+                        <td>{{form.contactno}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{form.zipcode.label}}</td>
+                        <td>{{form.zipcode}}</td>
+                    </tr>
+                </table>
 
                 <button type='submit' class='btn btn-success'>Save</button>
             </form>

@@ -6,4 +6,9 @@ class PersonForm(ModelForm):
         model = Person
         fields = '__all__'
 
+class PersonSalaryForm(ModelForm):
+    class Meta:
+        model = PersonSalary
+        fields='__all__'        
+
         
