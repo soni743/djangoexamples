@@ -123,3 +123,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+# Messages Tag Change
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = { messages.ERROR:'danger' }

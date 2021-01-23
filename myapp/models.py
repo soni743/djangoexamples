@@ -13,6 +13,7 @@ class Person(models.Model):
     gender = models.CharField(max_length=10, choices=GENDER, default='Male',verbose_name="Gender :")
 
     CITY = (
+        ('','Select'),
         ('Baroda','Baroda'),
         ('Surat','Surat'),
         ('Ahmedabad','Ahmedabad')
@@ -25,7 +26,7 @@ class Person(models.Model):
         return  f"{self.name}"
 
 class PersonSalary(models.Model):
-    userperson = models.ForeignKey(Person, on_delete=models.CASCADE,verbose_name="Person Name :")
+    userperson = models.ForeignKey(Person, on_delete=models.CASCADE,verbose_name="Person Name :", default=None, null=True)
     salary = models.IntegerField(null=True)
 
     def __str__(self):

@@ -4,7 +4,7 @@
 {% block contents %}
     <div class='row'>
         <div class='col-md-8'>
-            <link rel='stylesheet' href='{% static "css/tablestyle.css" %}'>
+            
             <form method='POST'>
                  {% csrf_token %}
                  <!-- {{form.as_p}} -->
@@ -38,11 +38,11 @@
         </div>
     </div>   
     <script>
-        const selectfield = document.getElementsByTagName('select')
-            selectfield[0].className += 'form-control'
+        // const selectfield = document.getElementsByTagName('select')
+        //     selectfield[0].className += 'form-control'
     
-        const inputfield = document.getElementsByTagName('input')
-            inputfield[0].className += 'form-control'        
+        // const inputfield = document.getElementsByTagName('input')
+        //     inputfield[0].className += 'form-control'        
     
     </script>
 {% endblock %}

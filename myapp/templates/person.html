@@ -9,32 +9,57 @@
                 <!-- {{form.as_p}} -->
                 <table>
                     <tr>
-                        <td>{{form.name.label}}</td>
-                        <td>{{form.name}}</td>
+                        <td>{{forms.name.label}}</td>
+                        <td>{{forms.name}}</td>
                     </tr>
                     <tr>
-                        <td>{{form.city.label}}</td>
-                        <td>{{form.city}}</td>
+                        <td>{{forms.city.label}}</td>
+                        <td>{{forms.city}}</td>
                     </tr>
                     <tr>
-                        <td>{{form.gender.label}}</td>
-                        <td>{{form.gender}}</td>
+                        <td>{{forms.gender.label}}</td>
+                        <td>{{forms.gender}}</td>
                     </tr>
                   
                     <tr>
-                        <td>{{form.contactno.label}}</td>
-                        <td>{{form.contactno}}</td>
+                        <td>{{forms.contactno.label}}</td>
+                        <td>{{forms.contactno}}</td>
                     </tr>
                     <tr>
-                        <td>{{form.zipcode.label}}</td>
-                        <td>{{form.zipcode}}</td>
+                        <td>{{forms.zipcode.label}}</td>
+                        <td>{{forms.zipcode}}</td>
                     </tr>
                 </table>
-
+            
                 <button type='submit' class='btn btn-success'>Save</button>
+
             </form>
         </div>            
     </div>
+
+    <div class="row">
+       <div class="col-md-12">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>ContactNo</th>
+                    <th>Action</th>
+                </tr>
+                {% for data in datas %}
+                    <tr>
+                        <td>{{data.name}}</td>
+                        <td>{{data.city}}</td>
+                        <td>{{data.contactno}}</td>
+                        <td>
+                            <button type='submit' class='btn btn-secondary'>Edit</button>
+                            <button type='submit' class='btn btn-danger'>Delete</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+       </div>
+   </div>
    <script>
        const inputfield = document.getElementsByTagName('input')
        for(let i in inputfield)

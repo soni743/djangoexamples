@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import  *
+from .models import  *
 # Create your views here.
 
 def test(req):
@@ -31,16 +32,17 @@ def Products(req):
 def Contacts(req):
     return render(req,'contactus.html',{'email':'soni7431@gmail.com'})  
 
-def Person(req):
+def PersonFunction(req):
     form = PersonForm()
+    formdata = Person.objects.all()
     if req.method == 'POST':
         form = PersonForm(req.POST)
         if form.is_valid():
             form.save()
             print('Saved')
-
     context = {
-        'form' : PersonForm
+        'forms' : form,
+        'datas' : formdata
     }
     return render(req,'person.html',context)   
 
@@ -50,7 +52,7 @@ def PersonSalary(req):
         form = PersonSalaryForm(req.POST)
         if form.is_valid():
             form.save()
-            messages.success(req, 'User Salary Saved!')
+            messages.error(req, 'User Salary Saved!')
 
     context={
         'form' : PersonSalaryForm
