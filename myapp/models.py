@@ -21,6 +21,7 @@ class Person(models.Model):
     city = models.CharField(max_length=100,choices =CITY, default='Baroda',verbose_name="City")
     contactno = models.IntegerField(null=True,verbose_name="Contact No. :")
     zipcode = models.IntegerField(null=True,verbose_name="Zip Code :")
+    img = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return  f"{self.name}"

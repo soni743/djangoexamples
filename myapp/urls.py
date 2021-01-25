@@ -9,4 +9,6 @@ urlpatterns = [
    path("contact/",Contacts, name='contactpage'),
    path("person/",PersonFunction, name='personpage'),
    path("personsalary/",PersonSalary, name='personsalarypage'),
+   path("persondelete/<str:pid>/",PersonDelete, name='persondeletepage'),
+   path("personedit/<str:pid>/",PersonEdit, name='personeditepage'),
 ]

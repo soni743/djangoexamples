@@ -3,7 +3,7 @@
 {% block contents %}
    <div class='row'>
        <div class='col-md-3'>
-           <form method='post'>
+           <form method='post' enctype='multipart/form-data'>
                 
                 {% csrf_token %}
                 <!-- {{form.as_p}} -->
@@ -29,6 +29,11 @@
                         <td>{{forms.zipcode.label}}</td>
                         <td>{{forms.zipcode}}</td>
                     </tr>
+
+                    <tr>
+                        <td>{{forms.img.label}}</td>
+                        <td>{{forms.img}}</td>
+                    </tr>
                 </table>
             
                 <button type='submit' class='btn btn-success'>Save</button>
@@ -39,21 +44,32 @@
 
     <div class="row">
        <div class="col-md-12">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+              <script>alert('{{message}}')</script>
+            {% endfor %}
+        </ul>
+        {% endif %}
             <table>
                 <tr>
                     <th>Name</th>
+                    <th>Gender</th>
                     <th>City</th>
                     <th>ContactNo</th>
+                    <th>ZipCode</th>
                     <th>Action</th>
                 </tr>
                 {% for data in datas %}
                     <tr>
                         <td>{{data.name}}</td>
+                        <td>{{data.gender}}</td>
                         <td>{{data.city}}</td>
                         <td>{{data.contactno}}</td>
+                        <td>{{data.zipcode}}</td>
                         <td>
-                            <button type='submit' class='btn btn-secondary'>Edit</button>
-                            <button type='submit' class='btn btn-danger'>Delete</button>
+                            <a href="{% url 'personeditepage' data.id %}"><button type='submit' class='btn btn-secondary'>Edit</button></a>
+                            <a href="{% url 'persondeletepage' data.id %}" onclick="return confirm('Are you sure to Delete?')" ><button type='submit' class='btn btn-danger'>Delete</button></a>
                         </td>
                     </tr>
                 {% endfor %}

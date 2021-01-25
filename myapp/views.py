@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import  *
@@ -36,16 +36,40 @@ def PersonFunction(req):
     form = PersonForm()
     formdata = Person.objects.all()
     if req.method == 'POST':
-        form = PersonForm(req.POST)
+        form = PersonForm(req.POST,req.FILES)
         if form.is_valid():
             form.save()
-            print('Saved')
+            form = PersonForm()
+            messages.success(req,'Person Data is Saved!')
     context = {
         'forms' : form,
         'datas' : formdata
     }
     return render(req,'person.html',context)   
+def PersonDelete(req,pid):
+    data = Person.objects.get(pk=pid)
+    data.delete()
+    messages.success(req,'Record is Deleted!')
+    return redirect('personpage')
 
+def PersonEdit(req,pid):
+    data = Person.objects.get(pk=pid)
+    form = PersonForm(instance=data)
+    formdata = Person.objects.all()
+    if req.method == 'POST':
+        form = PersonForm(req.POST,instance=data)
+        if form.is_valid():
+            form.save()
+            data=None
+            form=PersonForm(instance=data)
+            messages.success(req,"Record is Update!")
+            return redirect('personpage')
+    context = {
+        'forms' : form,
+        'datas' : formdata
+    }
+    return render(req,'person.html',context)
+    
 def PersonSalary(req):
     form = PersonSalaryForm()
     if req.method == 'POST':
@@ -58,3 +82,4 @@ def PersonSalary(req):
         'form' : PersonSalaryForm
     }   
     return render(req,'personsalary.html',context)   
+
