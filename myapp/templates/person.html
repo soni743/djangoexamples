@@ -6,8 +6,14 @@
            <form method='post' enctype='multipart/form-data'>
                 
                 {% csrf_token %}
+                
                 <!-- {{form.as_p}} -->
                 <table>
+                    {% if imgurl %}
+                         <tr>
+                               <td colspan="2"><img src='{{imgurl.ImageUrl}}'  width="30px" height="30px"></td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <td>{{forms.name.label}}</td>
                         <td>{{forms.name}}</td>
@@ -33,6 +39,9 @@
                     <tr>
                         <td>{{forms.img.label}}</td>
                         <td>{{forms.img}}</td>
+                       
+                       
+                       
                     </tr>
                 </table>
             
@@ -58,6 +67,7 @@
                     <th>City</th>
                     <th>ContactNo</th>
                     <th>ZipCode</th>
+                    <th>Image</th>
                     <th>Action</th>
                 </tr>
                 {% for data in datas %}
@@ -67,6 +77,7 @@
                         <td>{{data.city}}</td>
                         <td>{{data.contactno}}</td>
                         <td>{{data.zipcode}}</td>
+                        <td><img src='{{data.ImageUrl}}' width="30px" height="30px"/></td>
                         <td>
                             <a href="{% url 'personeditepage' data.id %}"><button type='submit' class='btn btn-secondary'>Edit</button></a>
                             <a href="{% url 'persondeletepage' data.id %}" onclick="return confirm('Are you sure to Delete?')" ><button type='submit' class='btn btn-danger'>Delete</button></a>

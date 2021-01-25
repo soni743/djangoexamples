@@ -56,17 +56,23 @@ def PersonEdit(req,pid):
     data = Person.objects.get(pk=pid)
     form = PersonForm(instance=data)
     formdata = Person.objects.all()
+    site = Person.objects.only('img').get(pk=pid)
+    print(site)
+  
     if req.method == 'POST':
-        form = PersonForm(req.POST,instance=data)
+        form = PersonForm(req.POST,req.FILES,instance=data)
         if form.is_valid():
             form.save()
             data=None
+            site=None
             form=PersonForm(instance=data)
-            messages.success(req,"Record is Update!")
+            messages.success(req,"Record is Updated!")
+           
             return redirect('personpage')
     context = {
         'forms' : form,
-        'datas' : formdata
+        'datas' : formdata,
+        'imgurl' : site
     }
     return render(req,'person.html',context)
     

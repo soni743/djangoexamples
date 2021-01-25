@@ -26,6 +26,14 @@ class Person(models.Model):
     def __str__(self):
         return  f"{self.name}"
 
+    def ImageUrl(self):
+        try:
+            url = self.img.url
+        except:
+            url ='/images/no.jpg'            
+
+        return url            
+
 class PersonSalary(models.Model):
     userperson = models.ForeignKey(Person, on_delete=models.CASCADE,verbose_name="Person Name :", default=None, null=True)
     salary = models.IntegerField(null=True)

@@ -1,5 +1,8 @@
 from django.urls import path
 from .views import *
+from django.conf import settings 
+from django.conf.urls.static import static 
+
 urlpatterns = [
    path("",test),
    path("paramfun/<str:pk>/<str:sk>",ParamFunction),
@@ -12,3 +15,6 @@ urlpatterns = [
    path("persondelete/<str:pid>/",PersonDelete, name='persondeletepage'),
    path("personedit/<str:pid>/",PersonEdit, name='personeditepage'),
 ]
+
+if settings.DEBUG: 
+        urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
