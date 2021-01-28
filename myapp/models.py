@@ -30,7 +30,7 @@ class Person(models.Model):
         try:
             url = self.img.url
         except:
-            url ='/images/no.jpg'            
+            url ='../static/images/noimg.jpg'            
 
         return url            
 
@@ -40,5 +40,15 @@ class PersonSalary(models.Model):
 
     def __str__(self):
         return f"{self.userperson} salary : {self.salary}"
+
+class Contact(models.Model):
+    name = models.CharField(max_length=200,null=True,verbose_name="Full Name :")        
+    email = models.EmailField(max_length=200,verbose_name="Email :")
+    PURPOSE=(
+        ('Purpose1','Purpose1'),
+        ('Purpose2','Purpose2')
+    )
+    purpose = models.CharField(choices=PURPOSE,max_length=200,verbose_name='Purpose :')
+    msg = models.TextField(max_length=1000,null=True)
 
 

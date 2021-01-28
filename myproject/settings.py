@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -120,9 +121,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,  "static")
+    os.path.join(BASE_DIR,  "myapp/static/images")
 ]
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'myapp/static/images') 
+#MEDIA_URL = '/static/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # Messages Tag Change
 from django.contrib.messages import constants as messages

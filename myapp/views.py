@@ -87,5 +87,19 @@ def PersonSalary(req):
     context={
         'form' : PersonSalaryForm
     }   
-    return render(req,'personsalary.html',context)   
+    return render(req,'personsalary.html',context)  
+
+def ContactUs(req):
+    form = ContactForm()
+    if req.method == 'POST':
+        form = ContactForm(req.POST)
+        if form.is_valid():
+            form.save()
+            form = ContactForm()
+            messages.success(req,'We will Contact You Soon...')
+
+    context ={
+        'forms' : form
+    }
+    return render(req,'contacts.html',context)
 

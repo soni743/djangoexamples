@@ -14,6 +14,7 @@ urlpatterns = [
    path("personsalary/",PersonSalary, name='personsalarypage'),
    path("persondelete/<str:pid>/",PersonDelete, name='persondeletepage'),
    path("personedit/<str:pid>/",PersonEdit, name='personeditepage'),
+   path('contactform',ContactUs,name='contactus')
 ]
 
 if settings.DEBUG: 

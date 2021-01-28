@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+#tweaks widgets
+{% load widget_tweaks %}
+{% block title %} Contact Us {% endblock %}
+{% block contents %}
+
+    <form method='POST'>
+        {% csrf_token %}
+        <h1>Contact Us</h1>
+        <div class='row'>
+            <div class='col-md-4'>
+                <label for="fname">First Name</label>
+                <!-- {{forms.name}} -->
+                <!-- tweaks widgets -->
+                {% render_field forms.name class='form-control' placeholder='First Name'%}
+                <!-- <label for="fname">First Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name.."> -->
+
+                <label for="lname">Email</label>
+                {{forms.email}}
+                <!-- <input type="text" id="lname" name="lastname" placeholder="Your last name.."> -->
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <label for="country">Purpose</label>
+                {{forms.purpose}}
+                <!-- <select id="country" name="country">
+                  <option value="australia">Australia</option>
+                  <option value="canada">Canada</option>
+                  <option value="usa">USA</option>
+                </select> -->
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <label for="subject">Message</label>
+                {{forms.msg}}
+                <!-- <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea> -->
+            </div>
+        </div>                            
+        <div class='row'>
+            <div class='col-md-4'>                   
+                <input type="submit" value="Submit">
+            </div>
+        </div>                            
+   </form>
+
+   {% if messages %}
+        {% for message in messages %}
+            <script>alert('{{message}}')</script>
+        {% endfor %}
+   {% endif %}
+
+{% endblock  %}
+
