@@ -28,9 +28,9 @@ class Person(models.Model):
 
     def ImageUrl(self):
         try:
-            url = self.img.url
+            url = '/static/images/' + self.img.url
         except:
-            url ='../static/images/noimg.jpg'            
+            url ='/static/images/noimg.jpg'            
 
         return url            
 
