@@ -51,4 +51,9 @@ class Contact(models.Model):
     purpose = models.CharField(choices=PURPOSE,max_length=200,verbose_name='Purpose :')
     msg = models.TextField(max_length=1000,null=True)
 
+class UserRegister(models.Model):
+    name = models.CharField(max_length=200,null=True,verbose_name='Enter Name :')
+    email = models.EmailField(max_length=200,null=True,verbose_name='Enter Email :')
+    password= models.CharField(max_length=500,null=True,verbose_name='Enter Password')
+
 

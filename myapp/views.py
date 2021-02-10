@@ -103,3 +103,22 @@ def ContactUs(req):
     }
     return render(req,'contacts.html',context)
 
+def UserLogin(req):
+    form = LoginForm()
+    context={
+        'forms' : form
+    }
+    return render(req,'login.html',context)
+
+def UserRegister(req):
+    form = UserRegistration()
+    if req.method == 'POST':
+        form = UserRegistration(req.POST)
+        if form.is_valid():
+            form.save()
+            print('saved!...')
+            return redirect('loginpage')
+    context ={
+        'forms' : form
+    }    
+    return render(req,'userregister.html',context)

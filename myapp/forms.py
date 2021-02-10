@@ -34,4 +34,19 @@ class ContactForm(ModelForm):
                 'msg':forms.Textarea(attrs={'class':'form-control','placeholder':'Your Message'})
         }
 
+class LoginForm(ModelForm):
+    class Meta:
+        model = UserRegister
+        fields = ['email','password']
+
+class UserRegistration(ModelForm):
+    class Meta:
+        model = UserRegister
+        fields='__all__'        
+
+        widgets = {
+            'name' : forms.TextInput(attrs={'class':'form-control','placeholder':'Name'}),
+            'email' : forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}),
+            'password' : forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'})
+        }
         
