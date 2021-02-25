@@ -117,14 +117,15 @@ def UserLogin(req):
         #bool_answer = User.objects.filter(email=userN).exists()
         #loginuser  = authenticate(req,email=userN,password=passN)
         if (UserRegister.objects.filter(email=userN).exists() and UserRegister.objects.filter(password=passN).exists()):
-            loggedname = UserRegister.objects.only('name').get(email=userN)
+            loggedname = UserRegister.objects.only("name").get(email=userN)
             messages.success(req,'User is Authenticated')
             context={
-                'form' : loggedname
+                'firstname' : loggedname
             }
             return render(req,'products.html',context)
         else:
-            messages.info(req,'User is not Authenticated')            
+            messages.info(req,'User is not Authenticated') 
+            
         print(userN, passN)
      
     context={
