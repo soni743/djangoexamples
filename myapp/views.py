@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import  *
-from .models import  *
+from myapp.models import  *
+from django.contrib.auth import authenticate,login
+from django.contrib.auth.models import User
+
+
 # Create your views here.
 
 def test(req):
@@ -105,15 +109,33 @@ def ContactUs(req):
 
 def UserLogin(req):
     form = LoginForm()
+   
+    if req.method == 'POST':
+        userN = req.POST.get('email')
+        passN = req.POST.get('password')
+        #if (User.objects.filter(email=userN).exists() and User.objects.filter(password=passN).exists()):
+        #bool_answer = User.objects.filter(email=userN).exists()
+        #loginuser  = authenticate(req,email=userN,password=passN)
+        if (UserRegister.objects.filter(email=userN).exists() and UserRegister.objects.filter(password=passN).exists()):
+            loggedname = UserRegister.objects.only('name').get(email=userN)
+            messages.success(req,'User is Authenticated')
+            context={
+                'form' : loggedname
+            }
+            return render(req,'products.html',context)
+        else:
+            messages.info(req,'User is not Authenticated')            
+        print(userN, passN)
+     
     context={
         'forms' : form
     }
     return render(req,'login.html',context)
 
-def UserRegister(req):
-    form = UserRegistration()
+def UserRegisterFunction(req):
+    form = UserRegistrationForm()
     if req.method == 'POST':
-        form = UserRegistration(req.POST)
+        form = UserRegistrationForm(req.POST)
         if form.is_valid():
             form.save()
             print('saved!...')

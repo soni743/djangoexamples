@@ -16,7 +16,7 @@ urlpatterns = [
    path("personedit/<str:pid>/",PersonEdit, name='personeditepage'),
    path('contactform/',ContactUs,name='contactus'),
    path('login/',UserLogin,name='loginpage'),
-   path('userregistration/',UserRegister,name='userregisterpage'),
+   path('userregistration/',UserRegisterFunction,name='userregisterpage'),
 ]
 
 if settings.DEBUG: 

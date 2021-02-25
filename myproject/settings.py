@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'adminapp',
     'widget_tweaks',
     'adminpanel',
+   
 ]
 
 MIDDLEWARE = [

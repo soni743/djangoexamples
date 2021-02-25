@@ -8,9 +8,10 @@ class PersonForm(ModelForm):
         fields = '__all__'
         widgets = {
             'img': forms.FileInput
+         
         }
 
-    
+
 
 class PersonSalaryForm(ModelForm):
     class Meta:
@@ -39,7 +40,7 @@ class LoginForm(ModelForm):
         model = UserRegister
         fields = ['email','password']
 
-class UserRegistration(ModelForm):
+class UserRegistrationForm(ModelForm):
     class Meta:
         model = UserRegister
         fields='__all__'        

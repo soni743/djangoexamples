@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Person(models.Model):
@@ -19,7 +20,7 @@ class Person(models.Model):
         ('Ahmedabad','Ahmedabad')
     )
     city = models.CharField(max_length=100,choices =CITY, default='Baroda',verbose_name="City")
-    contactno = models.IntegerField(null=True,verbose_name="Contact No. :")
+    contactno = models.IntegerField(null=True,verbose_name="Contact No. :", unique=True,error_messages={'unique':'This Contact Number is Already Registered'})
     zipcode = models.IntegerField(null=True,verbose_name="Zip Code :")
     img = models.ImageField(null=True, blank=True)
 
@@ -55,5 +56,10 @@ class UserRegister(models.Model):
     name = models.CharField(max_length=200,null=True,verbose_name='Enter Name :')
     email = models.EmailField(max_length=200,null=True,verbose_name='Enter Email :')
     password= models.CharField(max_length=500,null=True,verbose_name='Enter Password')
+
+    def __str__(self):
+         return f"{self.email}{self.password}"
+
+    
 
 
