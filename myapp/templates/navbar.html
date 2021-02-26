@@ -21,12 +21,20 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'personsalarypage' %}">PersonSalary</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'loginpage' %}">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'userregisterpage' %}">Register</a>
-          </li>
+          {% if request.session.uName is not None %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'loginpage' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'userregisterpage' %}">Register</a>
+            </li>
+          {% endif %}
+
+          
         </ul>
       </div>
     </div>

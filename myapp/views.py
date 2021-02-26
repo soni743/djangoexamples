@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import  *
 from myapp.models import  *
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 
 
@@ -109,27 +109,22 @@ def ContactUs(req):
 
 def UserLogin(req):
     form = LoginForm()
-   
+  
     if req.method == 'POST':
         userN = req.POST.get('email')
         passN = req.POST.get('password')
-        #if (User.objects.filter(email=userN).exists() and User.objects.filter(password=passN).exists()):
-        #bool_answer = User.objects.filter(email=userN).exists()
-        #loginuser  = authenticate(req,email=userN,password=passN)
-        if (UserRegister.objects.filter(email=userN).exists() and UserRegister.objects.filter(password=passN).exists()):
-            loggedname = UserRegister.objects.only("name").get(email=userN)
+        check_user = UserRegister.objects.filter(email=userN, password=passN)
+        print(check_user)
+        if check_user:
+        #if (UserRegister.objects.filter(email=userN).exists() and UserRegister.objects.filter(password=passN).exists()):
+            loggedname = UserRegister.objects.only('name').get(email=userN)
+            req.session['uName'] =loggedname.name
             messages.success(req,'User is Authenticated')
-            context={
-                'firstname' : loggedname
-            }
-            return render(req,'products.html',context)
+            return redirect('productpage')
         else:
-            messages.info(req,'User is not Authenticated') 
-            
-        print(userN, passN)
-     
+            messages.info(req,'User is not Authenticated')                     
     context={
-        'forms' : form
+            'forms' : form
     }
     return render(req,'login.html',context)
 
@@ -145,3 +140,8 @@ def UserRegisterFunction(req):
         'forms' : form
     }    
     return render(req,'userregister.html',context)
+
+def logoutfunction(req):
+    logout(req)
+    
+    return render(req,'login.html')    

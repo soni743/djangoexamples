@@ -3,7 +3,7 @@
 {% block contents %}
     <h1>This is Product Page</h1>
     <h6>My Product name is {{productname}}</h6>
-   
-        Welcome, {{firstname.name}}
-           
+    {% if request.session.uName is not None %}
+         Welcome, {{ request.session.uName }}
+    {% endif %}         
 {% endblock %}

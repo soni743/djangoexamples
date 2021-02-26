@@ -17,6 +17,7 @@ urlpatterns = [
    path('contactform/',ContactUs,name='contactus'),
    path('login/',UserLogin,name='loginpage'),
    path('userregistration/',UserRegisterFunction,name='userregisterpage'),
+   path('logout/',logoutfunction, name='logout')
 ]
 
 if settings.DEBUG: 

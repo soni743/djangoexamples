@@ -15,6 +15,9 @@
                         </tr>
                     {% endif %}
                     <tr>
+                        <td colspan="2">{{forms.errors}}</td>
+                    </tr>
+                    <tr>
                         <td>{{forms.name.label}}</td>
                         <td>{{forms.name}}</td>
                     </tr>
@@ -43,7 +46,7 @@
                        
                        
                     </tr>
-                    {{forms.errors}}
+                   
                 </table>
             
                 <button type='submit' class='btn btn-success'>Save</button>
