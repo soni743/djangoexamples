@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'adminapp',
     'widget_tweaks',
     'adminpanel',
+    'phonenumber_field',
+
    
 ]
 
@@ -133,3 +135,7 @@ MEDIA_ROOT =  os.path.join(BASE_DIR, 'myapp/static/images')
 # Messages Tag Change
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = { messages.ERROR:'danger' }
+
+
+PHONENUMBER_DB_FORMAT = 'NATIONAL'
+PHONENUMBER_DEFAULT_REGION = "IN"

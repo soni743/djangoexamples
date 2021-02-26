@@ -1,5 +1,5 @@
 from django.db import models
-
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -20,7 +20,7 @@ class Person(models.Model):
         ('Ahmedabad','Ahmedabad')
     )
     city = models.CharField(max_length=100,choices =CITY, default='Baroda',verbose_name="City")
-    contactno = models.IntegerField(null=True,verbose_name="Contact No. :", unique=True,error_messages={'unique':'This Contact Number is Already Registered'})
+    contactno = PhoneNumberField(unique=True)
     zipcode = models.IntegerField(null=True,verbose_name="Zip Code :")
     img = models.ImageField(null=True, blank=True)
 
