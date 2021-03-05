@@ -18,6 +18,7 @@
           
             <div class="row">
                  {% block contents %}
+                 {% csrf_token %}
                  {% endblock %} 
             </div>
 

@@ -4,12 +4,24 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-                {% for msg in messages %}
-                    {{msg}}
-                {% endfor %}
+           
                 <form method='post'>
                 {% csrf_token %}
+                {% if request.GET.next %}
+                     <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                {% endif %}     
                 <table class='table'>
+                    <tr>
+                        <td colspan='2'>
+                            {% if messages %}
+                                {% for message in  messages %}
+                                    <div class="alert alert-{{message.tags}}" role="alert">
+                                        {{message}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}     
+                        </td>    
+                    </tr>
                     <tr>
                         <td> Email :</td>
                         <td><input type='text' class="form-control" name='email' required></td>
@@ -19,6 +31,7 @@
                         <td><input type='password' class="form-control" name='password' required></td>
                     </tr>
                     <tr>
+                                               
                         <td colspan="2"><button type=submit class="btn btn-primary">Login</button></td>
                     </tr>
                 </table>

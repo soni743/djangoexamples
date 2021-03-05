@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from .forms import  *
 from myapp.models import  *
 from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth.decorators import user_passes_test
 
 
 # Create your views here.
@@ -80,18 +82,7 @@ def PersonEdit(req,pid):
     }
     return render(req,'person.html',context)
     
-def PersonSalary(req):
-    form = PersonSalaryForm()
-    if req.method == 'POST':
-        form = PersonSalaryForm(req.POST)
-        if form.is_valid():
-            form.save()
-            messages.error(req, 'User Salary Saved!')
 
-    context={
-        'form' : PersonSalaryForm
-    }   
-    return render(req,'personsalary.html',context)  
 
 def ContactUs(req):
     form = ContactForm()
@@ -107,26 +98,7 @@ def ContactUs(req):
     }
     return render(req,'contacts.html',context)
 
-def UserLogin(req):
-    form = LoginForm()
-  
-    if req.method == 'POST':
-        userN = req.POST.get('email')
-        passN = req.POST.get('password')
-        check_user = UserRegister.objects.filter(email=userN, password=passN)
-        print(check_user)
-        if check_user:
-        #if (UserRegister.objects.filter(email=userN).exists() and UserRegister.objects.filter(password=passN).exists()):
-            loggedname = UserRegister.objects.only('name').get(email=userN)
-            req.session['uName'] =loggedname.name
-            messages.success(req,'User is Authenticated')
-            return redirect('productpage')
-        else:
-            messages.info(req,'User is not Authenticated')                     
-    context={
-            'forms' : form
-    }
-    return render(req,'login.html',context)
+
 
 def UserRegisterFunction(req):
     form = UserRegistrationForm()
@@ -141,7 +113,41 @@ def UserRegisterFunction(req):
     }    
     return render(req,'userregister.html',context)
 
+def UserLogin(request):
+    form = LoginForm()
+  
+    if request.method == 'POST':
+        userN = request.POST.get('email')
+        passN = request.POST.get('password')
+        check_user = UserRegister.objects.filter(email=userN, password=passN)
+        print(check_user)
+        if check_user:
+          
+        #if (UserRegister.objects.filter(email=userN).exists() and UserRegister.objects.filter(password=passN).exists()):
+            loggedname = UserRegister.objects.only('name').get(email=userN)
+            request.session['uName'] =loggedname.name
+            return redirect('productpage')
+      
+        else:
+            messages.info(request,'User is not Authenticated')                     
+    context={
+            'forms' : form
+    }
+    return render(request,'login.html',context)
+
+def PersonSalary(req):
+    form = PersonSalaryForm()
+    if req.method == 'POST':
+        form = PersonSalaryForm(req.POST)
+        if form.is_valid():
+            form.save()
+            messages.error(req, 'User Salary Saved!')
+
+    context={
+        'form' : PersonSalaryForm
+    }   
+    return render(req,'personsalary.html',context)  
+
 def logoutfunction(req):
     logout(req)
-    
     return render(req,'login.html')    
